@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "60409283551",
+    "firebase_url": "https://simple-tour.firebaseio.com",
+    "project_id": "simple-tour",
+    "storage_bucket": "simple-tour.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60409283551:android:f3b1fd3f3c2400dd",
+        "android_client_info": {
+          "package_name": "com.kukuhsain.simpletour.host"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60409283551-03gkqfaaqrlreruk98h2gatt1isk6ce6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kukuhsain.simpletour.host",
+            "certificate_hash": "01C1107D917A34558955C62B0F82B2831BF7D32A"
+          }
+        },
+        {
+          "client_id": "60409283551-a60q2351jje8jgn7aet60qsq5lg8d423.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpHIs1lrXwJAhiFPJK_hIZqbr8SAq5mQo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60409283551-a60q2351jje8jgn7aet60qsq5lg8d423.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
