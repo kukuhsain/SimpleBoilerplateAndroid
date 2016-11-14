@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
@@ -58,5 +60,12 @@ public class SampleActivity extends AppCompatActivity {
             samples.add(new Sample(i, "Sample title "+i, "Sample description, Lorem ipsum "+i));
         }
         return samples;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_sample_activity, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
