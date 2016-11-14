@@ -1,5 +1,6 @@
 package com.kukuhsain.simple.boilerplate.view;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -31,6 +32,7 @@ public class SampleActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_samples) RecyclerView rvSamples;
 
+    private ProgressDialog progressDialog;
     private ActionBar actionBar;
     private RecyclerView.LayoutManager layoutManager;
     private SampleAdapter adapter;
@@ -85,5 +87,21 @@ public class SampleActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showLoading() {
+        if (progressDialog != null) {
+            progressDialog.show();
+        } else {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Please wait...");
+            progressDialog.show();
+        }
+    }
+
+    private void dismissLoading() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 }
