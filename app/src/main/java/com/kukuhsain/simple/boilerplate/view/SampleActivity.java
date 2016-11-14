@@ -9,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.kukuhsain.simple.boilerplate.R;
+import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
 import com.kukuhsain.simple.boilerplate.view.adapter.SampleAdapter;
 
@@ -67,5 +69,16 @@ public class SampleActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_sample_activity, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_sign_out:
+                PreferencesHelper.getInstance().clearData();
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
