@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.view.SampleActivity;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(samples.get(position));
+        holder.bind(context, samples.get(position));
     }
 
     @Override
@@ -54,9 +55,12 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Sample sample) {
+        public void bind(Context context, Sample sample) {
             tvName.setText(sample.getName());
             tvDescription.setText(sample.getDescription());
+            itemView.setOnClickListener(view -> {
+                ((SampleActivity) context).onItemClicked(sample);
+            });
         }
     }
 }

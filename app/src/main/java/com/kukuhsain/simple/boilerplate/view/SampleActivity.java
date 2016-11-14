@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
@@ -62,6 +63,10 @@ public class SampleActivity extends AppCompatActivity {
             samples.add(new Sample(i, "Sample title "+i, "Sample description, Lorem ipsum "+i));
         }
         return samples;
+    }
+
+    public void onItemClicked(Sample sample) {
+        Toast.makeText(this, sample.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
