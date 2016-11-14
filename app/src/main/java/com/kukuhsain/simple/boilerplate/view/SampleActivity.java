@@ -2,9 +2,11 @@ package com.kukuhsain.simple.boilerplate.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
@@ -21,8 +23,10 @@ import butterknife.ButterKnife;
  */
 
 public class SampleActivity extends AppCompatActivity {
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_samples) RecyclerView rvSamples;
 
+    private ActionBar actionBar;
     private RecyclerView.LayoutManager layoutManager;
     private SampleAdapter adapter;
 
@@ -31,6 +35,10 @@ public class SampleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Sample Activity");
 
         layoutManager = new LinearLayoutManager(this);
         rvSamples.setLayoutManager(layoutManager);
