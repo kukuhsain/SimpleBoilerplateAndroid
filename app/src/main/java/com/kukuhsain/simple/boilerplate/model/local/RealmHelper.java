@@ -23,33 +23,33 @@ public class RealmHelper {
         return INSTANCE;
     }
 
-    public void addSample(Sample destination) {
-        List<Sample> destinations = getAllSamples();
+    public void addSample(Sample sample) {
+        List<Sample> samples = getAllSamples();
         boolean isExisted = false;
-        for (Sample destination1 : destinations) {
-            if (destination.getSampleId() == destination1.getSampleId()) {
+        for (Sample sample1 : samples) {
+            if (sample.getSampleId() == sample1.getSampleId()) {
                 isExisted = true;
             }
         }
         if (!isExisted) {
             Realm.getDefaultInstance().executeTransaction(realm -> {
-                realm.copyToRealm(destination);
+                realm.copyToRealm(sample);
             });
         }
     }
 
-    public void addSamples(List<Sample> destinations) {
+    public void addSamples(List<Sample> samples) {
         List<Sample> realmSamples = getAllSamples();
-        for (Sample destination : destinations) {
+        for (Sample sample : samples) {
             boolean isExisted = false;
             for (Sample realmSample : realmSamples) {
-                if (realmSample.getSampleId() == destination.getSampleId()) {
+                if (realmSample.getSampleId() == sample.getSampleId()) {
                     isExisted = true;
                 }
             }
             if (!isExisted) {
                 Realm.getDefaultInstance().executeTransaction(realm -> {
-                    realm.copyToRealm(destination);
+                    realm.copyToRealm(sample);
                 });
             }
         }
