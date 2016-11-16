@@ -24,6 +24,8 @@ and more advantages that the libraries have offered. Here are some of the librar
 - Butterknife
 - Timber
 - Glide
+- Gson
+- Easypermissions
 
 ## Requirements
 
