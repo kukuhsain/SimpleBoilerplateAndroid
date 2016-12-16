@@ -1,6 +1,7 @@
 package com.kukuhsain.simple.boilerplate.main;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -13,7 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.kukuhsain.simple.boilerplate.R;
+import com.kukuhsain.simple.boilerplate.detail.DetailActivity;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
 import com.kukuhsain.simple.boilerplate.model.remote.SimpleApi;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Sample Activity");
+        actionBar.setTitle("Sample List");
 
         layoutManager = new LinearLayoutManager(this);
         rvSamples.setLayoutManager(layoutManager);
@@ -72,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onItemClicked(Sample sample) {
         Toast.makeText(this, sample.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("sample", new Gson().toJson(sample));
+        startActivity(intent);
     }
 
     @Override
