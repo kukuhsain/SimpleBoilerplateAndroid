@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.main;
+package com.kukuhsain.simple.boilerplate.ui.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

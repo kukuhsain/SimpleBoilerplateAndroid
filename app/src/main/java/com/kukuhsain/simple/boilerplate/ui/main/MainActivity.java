@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.main;
+package com.kukuhsain.simple.boilerplate.ui.main;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,23 +16,24 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.detail.DetailActivity;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
-import com.kukuhsain.simple.boilerplate.model.remote.SimpleApi;
+import com.kukuhsain.simple.boilerplate.ui.detail.DetailActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by kukuh on 14/11/16.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainPresenter.MainView {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_samples) RecyclerView rvSamples;
 
+    private MainPresenter mainPresenter;
     private ProgressDialog progressDialog;
     private ActionBar actionBar;
     private RecyclerView.LayoutManager layoutManager;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setTitle("Sample List");
 
+        mainPresenter = new MainPresenter(this);
+
         layoutManager = new LinearLayoutManager(this);
         rvSamples.setLayoutManager(layoutManager);
     }
@@ -56,21 +59,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         showLoading();
-        SimpleApi.getInstance()
-                .getDummySamples()
-                .subscribeOn(Schedulers.io())
-                .subscribe(samples -> {
-                    runOnUiThread(() -> {
-                        adapter = new MainAdapter(samples);
-                        rvSamples.setAdapter(adapter);
-                        dismissLoading();
-                    });
-                }, throwable -> {
-                    runOnUiThread(() -> {
-                        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                        dismissLoading();
-                    });
-                });
+        mainPresenter.requestDummySamples();
     }
 
     public void onItemClicked(Sample sample) {
@@ -112,5 +101,22 @@ public class MainActivity extends AppCompatActivity {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void onSuccess(List<Sample> samples) {
+        runOnUiThread(() -> {
+            adapter = new MainAdapter(samples);
+            rvSamples.setAdapter(adapter);
+            dismissLoading();
+        });
+    }
+
+    @Override
+    public void onError(String message) {
+        runOnUiThread(() -> {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            dismissLoading();
+        });
     }
 }

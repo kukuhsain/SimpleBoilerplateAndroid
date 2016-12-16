@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.detail;
+package com.kukuhsain.simple.boilerplate.ui.detail;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
