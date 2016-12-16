@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.view.adapter;
+package com.kukuhsain.simple.boilerplate.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
-import com.kukuhsain.simple.boilerplate.view.SampleActivity;
 
 import java.util.List;
 
@@ -20,11 +19,11 @@ import butterknife.ButterKnife;
  * Created by kukuh on 14/11/16.
  */
 
-public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private Context context;
     private List<Sample> samples;
 
-    public SampleAdapter(List<Sample> samples) {
+    public MainAdapter(List<Sample> samples) {
         this.samples = samples;
     }
 
@@ -59,7 +58,7 @@ public class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder
             tvName.setText(sample.getName());
             tvDescription.setText(sample.getDescription());
             itemView.setOnClickListener(view -> {
-                ((SampleActivity) context).onItemClicked(sample);
+                ((MainActivity) context).onItemClicked(sample);
             });
         }
     }
