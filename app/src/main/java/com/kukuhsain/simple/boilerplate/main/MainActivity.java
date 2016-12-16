@@ -16,12 +16,11 @@ import android.widget.Toast;
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.kukuhsain.simple.boilerplate.model.remote.SimpleApi;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by kukuh on 14/11/16.
@@ -53,17 +52,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new MainAdapter(getDummySamples());
-        rvSamples.setAdapter(adapter);
-    }
-
-    private List<Sample> getDummySamples() {
-        List<Sample> samples = new ArrayList<>();
-        int total = 10;
-        for (int i=0; i<total; i++) {
-            samples.add(new Sample(i, "Sample title "+i, "Sample description, Lorem ipsum "+i));
-        }
-        return samples;
+        showLoading();
+        SimpleApi.getInstance()
+                .getDummySamples()
+                .subscribeOn(Schedulers.io())
+                .subscribe(samples -> {
+                    runOnUiThread(() -> {
+                        adapter = new MainAdapter(samples);
+                        rvSamples.setAdapter(adapter);
+                        dismissLoading();
+                    });
+                }, throwable -> {
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        dismissLoading();
+                    });
+                });
     }
 
     public void onItemClicked(Sample sample) {

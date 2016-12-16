@@ -1,10 +1,15 @@
 package com.kukuhsain.simple.boilerplate.model.remote;
 
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
+import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 
 /**
  * Created by kukuh on 15/10/16.
@@ -32,6 +37,15 @@ public class SimpleApi {
         }
         accessToken = PreferencesHelper.getInstance().getAccessToken();
         return INSTANCE;
+    }
+
+    public Observable<List<Sample>> getDummySamples() {
+        List<Sample> samples = new ArrayList<>();
+        int total = 10;
+        for (int i=0; i<total; i++) {
+            samples.add(new Sample(i, "Sample title "+i, "Sample description, Lorem ipsum "+i));
+        }
+        return Observable.just(samples);
     }
 
     private interface ApiEndpoint {
