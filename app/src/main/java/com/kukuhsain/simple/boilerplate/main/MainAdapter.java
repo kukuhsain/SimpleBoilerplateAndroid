@@ -1,26 +1,20 @@
 package com.kukuhsain.simple.boilerplate.main;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by kukuh on 14/11/16.
  */
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
-    private Context context;
+public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
     private List<Sample> samples;
 
     public MainAdapter(List<Sample> samples) {
@@ -28,38 +22,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        context = parent.getContext();
+    public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sample, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new MainViewHolder(parent.getContext(), view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(context, samples.get(position));
+    public void onBindViewHolder(MainViewHolder holder, int position) {
+        holder.bind(samples.get(position));
     }
 
     @Override
     public int getItemCount() {
         return samples.size();
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_name) TextView tvName;
-        @BindView(R.id.tv_description) TextView tvDescription;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-
-        public void bind(Context context, Sample sample) {
-            tvName.setText(sample.getName());
-            tvDescription.setText(sample.getDescription());
-            itemView.setOnClickListener(view -> {
-                ((MainActivity) context).onItemClicked(sample);
-            });
-        }
     }
 }
