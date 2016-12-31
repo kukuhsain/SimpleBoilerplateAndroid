@@ -20,9 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.detail.DetailActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.signup.SignUpActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 
