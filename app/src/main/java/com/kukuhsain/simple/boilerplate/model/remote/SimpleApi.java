@@ -16,7 +16,7 @@ import rx.Observable;
  */
 
 public class SimpleApi {
-    public static final String BASE_URL = "http://simple-tour.appspot.com";
+    public static final String BASE_URL = "http://simple-boilerplate.appspot.com";
     private static SimpleApi INSTANCE;
     private ApiEndpoint api;
     private static String accessToken;
