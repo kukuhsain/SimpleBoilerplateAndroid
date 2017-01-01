@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kukuhsain.simple.boilerplate.BuildConfig;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
-import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.pojo.Sample;
 
 import java.util.ArrayList;
 import java.util.List;

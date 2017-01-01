@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.pojo.Sample;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

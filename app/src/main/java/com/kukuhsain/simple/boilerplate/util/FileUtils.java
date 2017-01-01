@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.utility;
+package com.kukuhsain.simple.boilerplate.util;
 
 import android.content.ContentUris;
 import android.content.Context;

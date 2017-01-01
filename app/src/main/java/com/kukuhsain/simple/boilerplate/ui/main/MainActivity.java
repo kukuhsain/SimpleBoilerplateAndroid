@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
-import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.pojo.Sample;
 import com.kukuhsain.simple.boilerplate.ui.detail.DetailActivity;
 
 import java.util.List;

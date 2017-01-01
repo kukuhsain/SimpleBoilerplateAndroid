@@ -1,6 +1,6 @@
 package com.kukuhsain.simple.boilerplate.model.local;
 
-import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.pojo.Sample;
 
 import java.util.List;
 

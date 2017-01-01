@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.pojo.Sample;
 
 import java.util.List;
 
