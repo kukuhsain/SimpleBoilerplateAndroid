@@ -4,12 +4,15 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.kukuhsain.simple.boilerplate.BuildConfig;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.pojo.Sample;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -31,8 +34,14 @@ public class SimpleApi {
 
     private SimpleApi() {
         RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
+                .setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addNetworkInterceptor(loggingInterceptor)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(httpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(rxAdapter)
                 .build();
