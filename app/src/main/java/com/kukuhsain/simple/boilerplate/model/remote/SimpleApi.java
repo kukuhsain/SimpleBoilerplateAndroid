@@ -69,6 +69,12 @@ public class SimpleApi {
                         .get("access_token").getAsString());
     }
 
+    public Observable<String> signIn(String email, String password) {
+        return api.signIn(email, password)
+                .map(jsonObject -> jsonObject.get("data").getAsJsonObject()
+                        .get("access_token").getAsString());
+    }
+
     private interface ApiEndpoint {
         @FormUrlEncoded
         @POST("/api/v1/auth/register")
@@ -76,5 +82,10 @@ public class SimpleApi {
                                       @Field("email") String email,
                                       @Field("password") String password,
                                       @Field("phone") String phoneNumber);
+
+        @FormUrlEncoded
+        @POST("/api/v1/auth/login")
+        Observable<JsonObject> signIn(@Field("email") String email,
+                                      @Field("password") String password);
     }
 }
