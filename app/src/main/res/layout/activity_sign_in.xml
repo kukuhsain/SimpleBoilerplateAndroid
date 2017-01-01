@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/tv_email"
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/tv_password"
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -51,6 +51,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Sign In"/>
+
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Sign Up Now"
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
