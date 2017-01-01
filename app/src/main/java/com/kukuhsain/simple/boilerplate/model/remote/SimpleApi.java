@@ -17,6 +17,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by kukuh on 15/10/16.
@@ -29,7 +30,7 @@ public class SimpleApi {
     private static String accessToken;
 
     private SimpleApi() {
-        RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.create();
+        RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
