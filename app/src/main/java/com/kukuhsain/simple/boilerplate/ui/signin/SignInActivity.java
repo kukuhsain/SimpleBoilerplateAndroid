@@ -19,7 +19,7 @@ import butterknife.OnClick;
  */
 
 public class SignInActivity extends AppCompatActivity {
-    @BindView(R.id.et_email) EditText tvEmail;
+    @BindView(R.id.et_email) EditText etEmail;
     @BindView(R.id.et_password) EditText etPassword;
 
     @Override
