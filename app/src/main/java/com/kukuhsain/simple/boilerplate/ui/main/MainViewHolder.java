@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

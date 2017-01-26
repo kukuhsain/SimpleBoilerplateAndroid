@@ -1,21 +1,23 @@
-package com.kukuhsain.simple.boilerplate.pojo;
+package com.kukuhsain.simple.boilerplate.model.datamodel;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by kukuh on 14/11/16.
  */
 
 public class Sample extends RealmObject {
-    private long sampleId;
+    @PrimaryKey
+    private long id;
     private String name;
     private String description;
 
     public Sample() {
     }
 
-    public Sample(long sampleId, String name, String description) {
-        this.sampleId = sampleId;
+    public Sample(long id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
@@ -36,11 +38,11 @@ public class Sample extends RealmObject {
         this.name = name;
     }
 
-    public double getSampleId() {
-        return sampleId;
+    public double getId() {
+        return id;
     }
 
-    public void setSampleId(long sampleId) {
-        this.sampleId = sampleId;
+    public void setId(long id) {
+        this.id = id;
     }
 }

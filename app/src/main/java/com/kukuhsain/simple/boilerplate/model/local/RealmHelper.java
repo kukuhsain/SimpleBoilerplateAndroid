@@ -1,6 +1,6 @@
 package com.kukuhsain.simple.boilerplate.model.local;
 
-import com.kukuhsain.simple.boilerplate.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 
 import java.util.List;
 
@@ -24,40 +24,21 @@ public class RealmHelper {
     }
 
     public void addSample(Sample sample) {
-        List<Sample> samples = getAllSamples();
-        boolean isExisted = false;
-        for (Sample sample1 : samples) {
-            if (sample.getSampleId() == sample1.getSampleId()) {
-                isExisted = true;
-            }
-        }
-        if (!isExisted) {
-            Realm.getDefaultInstance().executeTransaction(realm -> {
-                realm.copyToRealm(sample);
-            });
-        }
+        Realm.getDefaultInstance().executeTransaction(realm -> {
+            realm.copyToRealmOrUpdate(sample);
+        });
     }
 
     public void addSamples(List<Sample> samples) {
-        List<Sample> realmSamples = getAllSamples();
-        for (Sample sample : samples) {
-            boolean isExisted = false;
-            for (Sample realmSample : realmSamples) {
-                if (realmSample.getSampleId() == sample.getSampleId()) {
-                    isExisted = true;
-                }
-            }
-            if (!isExisted) {
-                Realm.getDefaultInstance().executeTransaction(realm -> {
-                    realm.copyToRealm(sample);
-                });
-            }
-        }
+        Realm.getDefaultInstance().executeTransaction(realm -> {
+            realm.copyToRealmOrUpdate(samples);
+        });
     }
 
     public List<Sample> getAllSamples() {
         RealmResults<Sample> iterableSamples = Realm.getDefaultInstance()
-                .where(Sample.class).findAll();
+                .where(Sample.class)
+                .findAll();
         return Realm.getDefaultInstance().copyFromRealm(iterableSamples);
     }
 }

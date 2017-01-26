@@ -1,6 +1,6 @@
 package com.kukuhsain.simple.boilerplate.ui.main;
 
-import com.kukuhsain.simple.boilerplate.pojo.Sample;
+import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.model.remote.SimpleApi;
 
 import java.util.List;
