@@ -76,6 +76,12 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
         presenter.getSamples();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
     public void onItemClicked(Sample sample) {
         Toast.makeText(this, sample.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailActivity.class);
