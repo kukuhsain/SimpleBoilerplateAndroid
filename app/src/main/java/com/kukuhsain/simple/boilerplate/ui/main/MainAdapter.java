@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.kukuhsain.simple.boilerplate.R;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +16,14 @@ import java.util.List;
  */
 
 public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
-    private List<Sample> samples;
+    private List<Sample> mSamples;
 
-    public MainAdapter(List<Sample> samples) {
-        this.samples = samples;
+    public MainAdapter() {
+        mSamples = new ArrayList<>();
+    }
+
+    public void setSamples(List<Sample> samples) {
+        mSamples = samples;
     }
 
     @Override
@@ -29,11 +34,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
     @Override
     public void onBindViewHolder(MainViewHolder holder, int position) {
-        holder.bind(samples.get(position));
+        holder.bind(mSamples.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return samples.size();
+        return mSamples.size();
     }
 }

@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.model.remote.SimpleApi;
+import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 import com.kukuhsain.simple.boilerplate.ui.main.MainActivity;
 
 import butterknife.BindView;
@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
             etPhoneNumber.setError("Please insert a valid phone number!");
         } else {
             showLoading();
-            SimpleApi.getInstance()
+            RetrofitService.Creator.newInstance()
                     .signUp(name, email, password, phoneNumber)
                     .subscribe(accessToken -> {
                         Intent intent = new Intent(this, MainActivity.class);

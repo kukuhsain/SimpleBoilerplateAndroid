@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.model.remote.SimpleApi;
+import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 import com.kukuhsain.simple.boilerplate.ui.main.MainActivity;
 import com.kukuhsain.simple.boilerplate.ui.signup.SignUpActivity;
 
@@ -47,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
             etPassword.requestFocus();
         } else {
             showLoading();
-            SimpleApi.getInstance()
+            RetrofitService.Creator.newInstance()
                     .signIn(email, password)
                     .subscribe(accessToken -> {
                         Intent intent = new Intent(this, MainActivity.class);

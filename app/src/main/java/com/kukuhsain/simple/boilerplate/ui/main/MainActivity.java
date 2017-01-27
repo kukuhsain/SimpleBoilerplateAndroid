@@ -16,8 +16,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
+import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
+import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
+import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
+import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 import com.kukuhsain.simple.boilerplate.ui.detail.DetailActivity;
 
 import java.util.List;
@@ -29,37 +32,48 @@ import butterknife.ButterKnife;
  * Created by kukuh on 14/11/16.
  */
 
-public class MainActivity extends AppCompatActivity implements MainPresenter.MainView {
+public class MainActivity extends AppCompatActivity implements MainMvpView {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_samples) RecyclerView rvSamples;
 
-    private MainPresenter mainPresenter;
+    private MainPresenter presenter;
+    private MainAdapter adapter;
     private ProgressDialog progressDialog;
     private ActionBar actionBar;
     private RecyclerView.LayoutManager layoutManager;
-    private MainAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initPresenter();
+        initRv();
 
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         actionBar.setTitle("Sample List");
+    }
 
-        mainPresenter = new MainPresenter(this);
+    private void initPresenter() {
+        DataManager dataManager = new DataManager(RetrofitService.Creator.newInstance(),
+                PreferencesHelper.getInstance(),
+                RealmHelper.getInstance());
+        presenter = new MainPresenter(dataManager);
+        presenter.attachView(this);
+    }
 
+    private void initRv() {
         layoutManager = new LinearLayoutManager(this);
         rvSamples.setLayoutManager(layoutManager);
+        adapter = new MainAdapter();
+        rvSamples.setAdapter(adapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        showLoading();
-        mainPresenter.requestDummySamples();
+        presenter.getSamples();
     }
 
     public void onItemClicked(Sample sample) {
@@ -87,7 +101,19 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         return super.onOptionsItemSelected(item);
     }
 
-    private void showLoading() {
+    @Override
+    public void showSamples(List<Sample> samples) {
+        adapter.setSamples(samples);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showEmptySample() {
+
+    }
+
+    @Override
+    public void showLoading() {
         if (progressDialog != null) {
             progressDialog.show();
         } else {
@@ -97,26 +123,13 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Mai
         }
     }
 
-    private void dismissLoading() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
+    @Override
+    public void dismissLoading() {
+        if (progressDialog != null) progressDialog.dismiss();
     }
 
     @Override
-    public void onSuccess(List<Sample> samples) {
-        runOnUiThread(() -> {
-            adapter = new MainAdapter(samples);
-            rvSamples.setAdapter(adapter);
-            dismissLoading();
-        });
-    }
-
-    @Override
-    public void onError(String message) {
-        runOnUiThread(() -> {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-            dismissLoading();
-        });
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -23,13 +23,13 @@ public class RealmHelper {
         return INSTANCE;
     }
 
-    public void addSample(Sample sample) {
+    public void saveOrUpdateSample(Sample sample) {
         Realm.getDefaultInstance().executeTransaction(realm -> {
             realm.copyToRealmOrUpdate(sample);
         });
     }
 
-    public void addSamples(List<Sample> samples) {
+    public void saveOrUpdateSamples(List<Sample> samples) {
         Realm.getDefaultInstance().executeTransaction(realm -> {
             realm.copyToRealmOrUpdate(samples);
         });

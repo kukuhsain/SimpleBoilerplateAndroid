@@ -1,37 +1,43 @@
 package com.kukuhsain.simple.boilerplate.ui.main;
 
+import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
-import com.kukuhsain.simple.boilerplate.model.remote.SimpleApi;
+import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
+import com.kukuhsain.simple.boilerplate.ui.base.BasePresenter;
 
 import java.util.List;
 
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
  * Created by kukuh on 16/12/16.
  */
 
-public class MainPresenter {
-    private MainView view;
+public class MainPresenter extends BasePresenter<MainMvpView> {
+    private final DataManager mDataManager;
 
-    public MainPresenter(MainView view) {
-        this.view = view;
+    public MainPresenter(DataManager mDataManager) {
+        this.mDataManager = mDataManager;
     }
 
-    public void requestDummySamples() {
-        SimpleApi.getInstance()
-                .getDummySamples()
-                .subscribeOn(Schedulers.io())
+    public void getSamples() {
+        checkViewAttached();
+        getMvpView().showLoading();
+        mDataManager.getDummySamples()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(samples -> {
-                    view.onSuccess(samples);
+                    mDataManager.getRealmHelper().saveOrUpdateSamples(samples);
+                    if (isViewAttached()) {
+                        getMvpView().showSamples(samples);
+                        getMvpView().dismissLoading();
+                    }
                 }, throwable -> {
-                    view.onError(throwable.getMessage());
                     throwable.printStackTrace();
+                    if (isViewAttached()) {
+                        getMvpView().showToast(throwable.getMessage());
+                        getMvpView().dismissLoading();
+                    }
                 });
-    }
-
-    public interface MainView {
-        void onSuccess(List<Sample> samples);
-        void onError(String message);
     }
 }
