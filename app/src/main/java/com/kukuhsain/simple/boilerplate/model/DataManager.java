@@ -43,16 +43,4 @@ public class DataManager {
         }
         return Observable.just(samples);
     }
-
-    public Observable<String> signUp(String name, String email, String password, String phoneNumber) {
-        return mRetrofitService.signUp(name, email, password, phoneNumber)
-                .map(jsonObject -> jsonObject.get("data").getAsJsonObject()
-                        .get("access_token").getAsString());
-    }
-
-    public Observable<String> signIn(String email, String password) {
-        return mRetrofitService.signIn(email, password)
-                .map(jsonObject -> jsonObject.get("data").getAsJsonObject()
-                        .get("access_token").getAsString());
-    }
 }
