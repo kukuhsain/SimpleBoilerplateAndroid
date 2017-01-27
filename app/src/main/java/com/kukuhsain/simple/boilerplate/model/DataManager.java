@@ -5,7 +5,6 @@ import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
 import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -33,15 +32,6 @@ public class DataManager {
 
     public RealmHelper getRealmHelper() {
         return mRealmHelper;
-    }
-
-    public Observable<List<Sample>> getDummySamples() {
-        List<Sample> samples = new ArrayList<>();
-        int total = 10;
-        for (int i=0; i<total; i++) {
-            samples.add(new Sample(i, "Sample title "+i, "Sample description, Lorem ipsum "+i));
-        }
-        return Observable.just(samples);
     }
 
     public Observable<List<Sample>> getSamples() {

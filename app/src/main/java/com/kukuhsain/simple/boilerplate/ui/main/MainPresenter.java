@@ -1,8 +1,11 @@
 package com.kukuhsain.simple.boilerplate.ui.main;
 
 import com.kukuhsain.simple.boilerplate.model.DataManager;
+import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.ui.base.BasePresenter;
 import com.kukuhsain.simple.boilerplate.util.RxUtil;
+
+import java.util.List;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -23,7 +26,9 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         checkViewAttached();
         RxUtil.unsubscribe(mGetSamplesSubscription);
         getMvpView().showLoading();
-        mGetSamplesSubscription = mDataManager.getDummySamples()
+        List<Sample> savedSamples = mDataManager.getRealmHelper().getAllSamples();
+        getMvpView().showSamples(savedSamples);
+        mGetSamplesSubscription = mDataManager.getSamples()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(samples -> {
                     mDataManager.getRealmHelper().saveOrUpdateSamples(samples);
@@ -43,6 +48,6 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mGetSamplesSubscription != null) mGetSamplesSubscription.unsubscribe();
+        RxUtil.unsubscribe(mGetSamplesSubscription);
     }
 }
