@@ -43,4 +43,8 @@ public class DataManager {
         }
         return Observable.just(samples);
     }
+
+    public Observable<List<Sample>> getSamples() {
+        return mRetrofitService.getSamples();
+    }
 }

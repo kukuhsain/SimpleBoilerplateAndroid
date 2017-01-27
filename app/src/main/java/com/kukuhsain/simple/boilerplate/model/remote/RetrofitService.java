@@ -1,12 +1,17 @@
 package com.kukuhsain.simple.boilerplate.model.remote;
 
 import com.kukuhsain.simple.boilerplate.BuildConfig;
+import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import rx.Observable;
 import rx.schedulers.Schedulers;
 
 /**
@@ -34,4 +39,7 @@ public interface RetrofitService {
             return retrofit.create(RetrofitService.class);
         }
     }
+
+    @GET("/api/v1/samples")
+    Observable<List<Sample>> getSamples();
 }
