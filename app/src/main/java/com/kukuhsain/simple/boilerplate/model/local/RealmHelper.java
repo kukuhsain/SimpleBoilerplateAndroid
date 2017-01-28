@@ -14,14 +14,17 @@ import io.realm.RealmResults;
 public class RealmHelper {
     private static RealmHelper INSTANCE;
 
-    private RealmHelper() {}
+    public RealmHelper() {
+    }
+
+    /*private RealmHelper() {}
 
     public static RealmHelper getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new RealmHelper();
         }
         return INSTANCE;
-    }
+    }*/
 
     public void saveOrUpdateSample(Sample sample) {
         Realm.getDefaultInstance().executeTransaction(realm -> {

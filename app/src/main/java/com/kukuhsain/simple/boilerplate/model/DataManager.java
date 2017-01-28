@@ -7,6 +7,8 @@ import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 /**
@@ -19,6 +21,7 @@ public class DataManager {
     private final PreferencesHelper mPreferencesHelper;
     private final RealmHelper mRealmHelper;
 
+    @Inject
     public DataManager(RetrofitService mRetrofitService, PreferencesHelper mPreferencesHelper,
                        RealmHelper mRealmHelper) {
         this.mRetrofitService = mRetrofitService;

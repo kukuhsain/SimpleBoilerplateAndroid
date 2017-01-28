@@ -3,26 +3,19 @@ package com.kukuhsain.simple.boilerplate.model.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.kukuhsain.simple.boilerplate.SimpleApp;
+import javax.inject.Inject;
 
 /**
  * Created by kukuh on 20/10/16.
  */
 
 public class PreferencesHelper {
-    private static PreferencesHelper INSTANCE;
     private SharedPreferences sharedPreferences;
 
-    private PreferencesHelper() {
-        sharedPreferences = SimpleApp.getInstance()
-                .getSharedPreferences("simpletour.host.sp", Context.MODE_PRIVATE);
-    }
-
-    public static PreferencesHelper getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new PreferencesHelper();
-        }
-        return INSTANCE;
+    @Inject
+    public PreferencesHelper(Context context) {
+        sharedPreferences = context
+                .getSharedPreferences("simple.boilerplate.sp", Context.MODE_PRIVATE);
     }
 
     public void putAccessToken(String accessToken) {

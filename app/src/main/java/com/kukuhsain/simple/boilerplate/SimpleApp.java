@@ -2,6 +2,12 @@ package com.kukuhsain.simple.boilerplate;
 
 import android.app.Application;
 
+import com.kukuhsain.simple.boilerplate.injection.component.ActivityComponent;
+import com.kukuhsain.simple.boilerplate.injection.component.ApplicationComponent;
+import com.kukuhsain.simple.boilerplate.injection.component.DaggerApplicationComponent;
+import com.kukuhsain.simple.boilerplate.injection.module.ApplicationModule;
+import com.kukuhsain.simple.boilerplate.injection.module.NetworkModule;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import timber.log.Timber;
@@ -11,26 +17,40 @@ import timber.log.Timber;
  */
 
 public class SimpleApp extends Application {
-    private static SimpleApp INSTANCE;
 
-    public static SimpleApp getInstance() {
-        return INSTANCE;
-    }
+    private ApplicationComponent mApplicationComponent;
+    private ActivityComponent mActivityComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        INSTANCE = this;
+        setupRealm();
 
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
+
+        mApplicationComponent = createComponent();
+
+        Timber.d("Application onCreate...");
+    }
+
+    private void setupRealm() {
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
+    }
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
-        Timber.d("Application onCreate...");
+    public ApplicationComponent createComponent() {
+        return DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .networkModule(new NetworkModule())
+                .build();
+    }
+
+    public ApplicationComponent getApplicationComponent() {
+        return mApplicationComponent;
     }
 }

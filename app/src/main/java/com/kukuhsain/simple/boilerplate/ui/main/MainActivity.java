@@ -16,14 +16,15 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.model.DataManager;
+import com.kukuhsain.simple.boilerplate.SimpleApp;
+import com.kukuhsain.simple.boilerplate.injection.component.ActivityComponent;
+import com.kukuhsain.simple.boilerplate.injection.component.DaggerActivityComponent;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
-import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
-import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
-import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 import com.kukuhsain.simple.boilerplate.ui.detail.DetailActivity;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_samples) RecyclerView rvSamples;
 
-    private MainPresenter presenter;
+    @Inject MainPresenter presenter;
     private MainAdapter adapter;
     private ProgressDialog progressDialog;
     private ActionBar actionBar;
@@ -47,7 +48,13 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initPresenter();
+
+        ActivityComponent component = DaggerActivityComponent.builder()
+                .applicationComponent(getApp().getApplicationComponent())
+                .build();
+        component.inject(this);
+        presenter.attachView(this);
+
         initRv();
 
         setSupportActionBar(toolbar);
@@ -55,12 +62,8 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
         actionBar.setTitle("Sample List");
     }
 
-    private void initPresenter() {
-        DataManager dataManager = new DataManager(RetrofitService.Creator.newInstance(),
-                PreferencesHelper.getInstance(),
-                RealmHelper.getInstance());
-        presenter = new MainPresenter(dataManager);
-        presenter.attachView(this);
+    private SimpleApp getApp() {
+        return (SimpleApp) getApplication();
     }
 
     private void initRv() {
@@ -100,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_sign_out:
-                PreferencesHelper.getInstance().clearData();
                 finish();
                 break;
         }

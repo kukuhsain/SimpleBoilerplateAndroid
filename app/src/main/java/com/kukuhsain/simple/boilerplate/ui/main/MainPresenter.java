@@ -7,6 +7,8 @@ import com.kukuhsain.simple.boilerplate.util.RxUtil;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -18,6 +20,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     private final DataManager mDataManager;
     private Subscription mGetSamplesSubscription;
 
+    @Inject
     public MainPresenter(DataManager mDataManager) {
         this.mDataManager = mDataManager;
     }
