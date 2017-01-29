@@ -22,11 +22,11 @@ public class DataManager {
     private final RealmHelper mRealmHelper;
 
     @Inject
-    public DataManager(RetrofitService mRetrofitService, PreferencesHelper mPreferencesHelper,
-                       RealmHelper mRealmHelper) {
-        this.mRetrofitService = mRetrofitService;
-        this.mPreferencesHelper = mPreferencesHelper;
-        this.mRealmHelper = mRealmHelper;
+    public DataManager(RetrofitService retrofitService, PreferencesHelper preferencesHelper,
+                       RealmHelper realmHelper) {
+        mRetrofitService = retrofitService;
+        mPreferencesHelper = preferencesHelper;
+        mRealmHelper = realmHelper;
     }
 
     public PreferencesHelper getPreferencesHelper() {
