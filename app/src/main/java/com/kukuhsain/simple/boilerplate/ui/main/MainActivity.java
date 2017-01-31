@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
         ButterKnife.bind(this);
 
         ActivityComponent component = DaggerActivityComponent.builder()
-                .applicationComponent(getApp().getApplicationComponent())
+                .applicationComponent(SimpleApp.get(this).getApplicationComponent())
                 .build();
         component.inject(this);
         presenter.attachView(this);
@@ -60,10 +60,6 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         actionBar.setTitle("Sample List");
-    }
-
-    private SimpleApp getApp() {
-        return (SimpleApp) getApplication();
     }
 
     private void initRv() {

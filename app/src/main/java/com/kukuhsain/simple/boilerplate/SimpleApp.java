@@ -1,6 +1,7 @@
 package com.kukuhsain.simple.boilerplate;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.kukuhsain.simple.boilerplate.injection.component.ActivityComponent;
 import com.kukuhsain.simple.boilerplate.injection.component.ApplicationComponent;
@@ -33,6 +34,10 @@ public class SimpleApp extends Application {
         mApplicationComponent = createComponent();
 
         Timber.d("Application onCreate...");
+    }
+
+    public static SimpleApp get(Context context) {
+        return (SimpleApp) context.getApplicationContext();
     }
 
     private void setupRealm() {
