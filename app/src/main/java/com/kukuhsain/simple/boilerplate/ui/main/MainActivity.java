@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
     @Inject MainPresenter presenter;
     private MainAdapter adapter;
     private ProgressDialog progressDialog;
-    private ActionBar actionBar;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,15 +52,19 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
         component.inject(this);
         presenter.attachView(this);
 
+        initActionBar();
         initRv();
+    }
 
+    private void initActionBar() {
         setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("Sample List");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Sample List");
+        }
     }
 
     private void initRv() {
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvSamples.setLayoutManager(layoutManager);
         adapter = new MainAdapter();
         rvSamples.setAdapter(adapter);
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
     }
 
     public void onItemClicked(Sample sample) {
-        Toast.makeText(this, sample.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("sample", new Gson().toJson(sample));
         startActivity(intent);
