@@ -7,7 +7,7 @@ import com.kukuhsain.simple.boilerplate.injection.component.ActivityComponent;
 import com.kukuhsain.simple.boilerplate.injection.component.ApplicationComponent;
 import com.kukuhsain.simple.boilerplate.injection.component.DaggerApplicationComponent;
 import com.kukuhsain.simple.boilerplate.injection.module.ApplicationModule;
-import com.kukuhsain.simple.boilerplate.injection.module.NetworkModule;
+import com.kukuhsain.simple.boilerplate.injection.module.DataModule;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -51,7 +51,7 @@ public class SimpleApp extends Application {
     public ApplicationComponent createComponent() {
         return DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                .networkModule(new NetworkModule())
+                .dataModule(new DataModule())
                 .build();
     }
 

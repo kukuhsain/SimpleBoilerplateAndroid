@@ -1,8 +1,6 @@
 package com.kukuhsain.simple.boilerplate.injection.component;
 
 import com.kukuhsain.simple.boilerplate.injection.PerActivity;
-import com.kukuhsain.simple.boilerplate.injection.module.ApplicationModule;
-import com.kukuhsain.simple.boilerplate.injection.module.NetworkModule;
 import com.kukuhsain.simple.boilerplate.ui.main.MainActivity;
 
 import dagger.Component;
@@ -12,8 +10,7 @@ import dagger.Component;
  */
 
 @PerActivity
-@Component(dependencies = ApplicationComponent.class,
-        modules={ApplicationModule.class, NetworkModule.class})
+@Component(dependencies = ApplicationComponent.class)
 public interface ActivityComponent {
 
     void inject(MainActivity activity);

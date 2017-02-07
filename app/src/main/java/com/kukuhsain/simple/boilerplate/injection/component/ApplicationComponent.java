@@ -3,7 +3,7 @@ package com.kukuhsain.simple.boilerplate.injection.component;
 import android.content.Context;
 
 import com.kukuhsain.simple.boilerplate.injection.module.ApplicationModule;
-import com.kukuhsain.simple.boilerplate.injection.module.NetworkModule;
+import com.kukuhsain.simple.boilerplate.injection.module.DataModule;
 import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
@@ -18,7 +18,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class, NetworkModule.class})
+@Component(modules = {ApplicationModule.class, DataModule.class})
 public interface ApplicationComponent {
 
     Context context();

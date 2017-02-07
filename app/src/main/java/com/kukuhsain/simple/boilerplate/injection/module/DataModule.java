@@ -1,5 +1,9 @@
 package com.kukuhsain.simple.boilerplate.injection.module;
 
+import android.content.Context;
+
+import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
+import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
 import com.kukuhsain.simple.boilerplate.model.remote.RetrofitFactory;
 import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 
@@ -13,11 +17,23 @@ import dagger.Provides;
  */
 
 @Module
-public class NetworkModule {
+public class DataModule {
 
     @Provides
     @Singleton
     RetrofitService provideRetrofitService() {
         return RetrofitFactory.newInstance().create(RetrofitService.class);
+    }
+
+    @Provides
+    @Singleton
+    public PreferencesHelper providePreferencesHelper(Context context) {
+        return new PreferencesHelper(context);
+    }
+
+    @Provides
+    @Singleton
+    public RealmHelper provideRealmHelper() {
+        return new RealmHelper();
     }
 }
