@@ -3,11 +3,10 @@ package com.kukuhsain.simple.boilerplate.model;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.model.local.PreferencesHelper;
 import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
+import com.kukuhsain.simple.boilerplate.model.remote.RetrofitFactory;
 import com.kukuhsain.simple.boilerplate.model.remote.RetrofitService;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import rx.Observable;
 
@@ -17,12 +16,21 @@ import rx.Observable;
 
 public class DataManager {
 
+    private static DataManager INSTANCE;
     private final RetrofitService mRetrofitService;
     private final PreferencesHelper mPreferencesHelper;
     private final RealmHelper mRealmHelper;
 
-    @Inject
-    public DataManager(RetrofitService retrofitService, PreferencesHelper preferencesHelper,
+    public static DataManager getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new DataManager(RetrofitFactory.newInstance().create(RetrofitService.class),
+                    new PreferencesHelper(),
+                    new RealmHelper());
+        }
+        return INSTANCE;
+    }
+
+    private DataManager(RetrofitService retrofitService, PreferencesHelper preferencesHelper,
                        RealmHelper realmHelper) {
         mRetrofitService = retrofitService;
         mPreferencesHelper = preferencesHelper;

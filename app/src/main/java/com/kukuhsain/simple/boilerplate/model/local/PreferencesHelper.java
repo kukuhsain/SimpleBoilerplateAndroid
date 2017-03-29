@@ -3,7 +3,7 @@ package com.kukuhsain.simple.boilerplate.model.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import javax.inject.Inject;
+import com.kukuhsain.simple.boilerplate.SimpleApp;
 
 /**
  * Created by kukuh on 20/10/16.
@@ -12,9 +12,8 @@ import javax.inject.Inject;
 public class PreferencesHelper {
     private SharedPreferences sharedPreferences;
 
-    @Inject
-    public PreferencesHelper(Context context) {
-        sharedPreferences = context
+    public PreferencesHelper() {
+        sharedPreferences = SimpleApp.getInstance()
                 .getSharedPreferences("simple.boilerplate.sp", Context.MODE_PRIVATE);
     }
 

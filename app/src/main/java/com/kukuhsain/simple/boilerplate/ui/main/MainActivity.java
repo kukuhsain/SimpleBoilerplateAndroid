@@ -15,15 +15,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kukuhsain.simple.boilerplate.R;
-import com.kukuhsain.simple.boilerplate.SimpleApp;
-import com.kukuhsain.simple.boilerplate.injection.component.ActivityComponent;
-import com.kukuhsain.simple.boilerplate.injection.component.DaggerActivityComponent;
+
+import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.ui.detail.DetailActivity;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_samples) RecyclerView rvSamples;
 
-    @Inject MainPresenter presenter;
+    private MainPresenter presenter;
     private MainAdapter adapter;
     private ProgressDialog progressDialog;
 
@@ -45,11 +42,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        ActivityComponent component = DaggerActivityComponent.builder()
-                .applicationComponent(SimpleApp.get(this).getApplicationComponent())
-                .build();
-        component.inject(this);
+        presenter = new MainPresenter(DataManager.getInstance());
         presenter.attachView(this);
 
         initActionBar();

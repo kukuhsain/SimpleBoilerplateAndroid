@@ -3,12 +3,6 @@ package com.kukuhsain.simple.boilerplate;
 import android.app.Application;
 import android.content.Context;
 
-import com.kukuhsain.simple.boilerplate.injection.component.ActivityComponent;
-import com.kukuhsain.simple.boilerplate.injection.component.ApplicationComponent;
-import com.kukuhsain.simple.boilerplate.injection.component.DaggerApplicationComponent;
-import com.kukuhsain.simple.boilerplate.injection.module.ApplicationModule;
-import com.kukuhsain.simple.boilerplate.injection.module.DataModule;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import timber.log.Timber;
@@ -19,25 +13,19 @@ import timber.log.Timber;
 
 public class SimpleApp extends Application {
 
-    private ApplicationComponent mApplicationComponent;
-    private ActivityComponent mActivityComponent;
+    private static SimpleApp INSTANCE;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        INSTANCE = this;
         setupRealm();
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
 
-        mApplicationComponent = createComponent();
-
         Timber.d("Application onCreate...");
-    }
-
-    public static SimpleApp get(Context context) {
-        return (SimpleApp) context.getApplicationContext();
     }
 
     private void setupRealm() {
@@ -48,14 +36,7 @@ public class SimpleApp extends Application {
         Realm.setDefaultConfiguration(realmConfiguration);
     }
 
-    public ApplicationComponent createComponent() {
-        return DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .dataModule(new DataModule())
-                .build();
-    }
-
-    public ApplicationComponent getApplicationComponent() {
-        return mApplicationComponent;
+    public static SimpleApp getInstance() {
+        return INSTANCE;
     }
 }

@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'android-apt'
 apply plugin: 'realm-android'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.kukuhsain.simple.boilerplate"
         minSdkVersion 16
@@ -43,13 +43,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.6.9'
 
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    compile 'com.android.support:cardview-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:support-v4:25.3.0'
+    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:recyclerview-v7:25.3.0'
+    compile 'com.android.support:cardview-v7:25.3.0'
     compile 'com.jakewharton.timber:timber:4.3.1'
-    compile 'com.jakewharton:butterknife:8.4.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -59,7 +58,6 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'pub.devrel:easypermissions:0.2.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.google.dagger:dagger:2.8'
-    apt 'com.google.dagger:dagger-compiler:2.8'
 }
