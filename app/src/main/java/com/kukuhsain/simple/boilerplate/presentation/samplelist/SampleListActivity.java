@@ -18,7 +18,7 @@ import com.kukuhsain.simple.boilerplate.R;
 
 import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
-import com.kukuhsain.simple.boilerplate.presentation.detail.DetailActivity;
+import com.kukuhsain.simple.boilerplate.presentation.sampledetail.SampleDetailActivity;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class SampleListActivity extends AppCompatActivity implements SampleListM
     }
 
     public void onItemClicked(Sample sample) {
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, SampleDetailActivity.class);
         intent.putExtra("sample", new Gson().toJson(sample));
         startActivity(intent);
     }

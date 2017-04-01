@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.presentation.detail;
+package com.kukuhsain.simple.boilerplate.presentation.sampledetail;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * Created by kukuh on 16/12/16.
  */
 
-public class DetailActivity extends AppCompatActivity {
+public class SampleDetailActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.tv_name) TextView tvName;
     @BindView(R.id.tv_description) TextView tvDescription;
@@ -26,7 +26,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_sample_detail);
         ButterKnife.bind(this);
 
         initActionBar();
