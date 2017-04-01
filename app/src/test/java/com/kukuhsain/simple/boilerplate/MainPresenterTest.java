@@ -4,8 +4,8 @@ import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
 import com.kukuhsain.simple.boilerplate.testutil.RxAndroidSchedulersRule;
-import com.kukuhsain.simple.boilerplate.ui.main.MainMvpView;
-import com.kukuhsain.simple.boilerplate.ui.main.MainPresenter;
+import com.kukuhsain.simple.boilerplate.presentation.main.MainMvpView;
+import com.kukuhsain.simple.boilerplate.presentation.main.MainPresenter;
 
 import org.junit.After;
 import org.junit.Before;

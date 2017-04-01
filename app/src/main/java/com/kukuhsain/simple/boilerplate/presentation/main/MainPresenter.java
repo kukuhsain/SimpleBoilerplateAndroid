@@ -1,8 +1,8 @@
-package com.kukuhsain.simple.boilerplate.ui.main;
+package com.kukuhsain.simple.boilerplate.presentation.main;
 
 import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
-import com.kukuhsain.simple.boilerplate.ui.base.BasePresenter;
+import com.kukuhsain.simple.boilerplate.presentation.base.BasePresenter;
 import com.kukuhsain.simple.boilerplate.util.RxUtil;
 
 import java.util.List;

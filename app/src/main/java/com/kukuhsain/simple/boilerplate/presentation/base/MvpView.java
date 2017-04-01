@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.ui.base;
+package com.kukuhsain.simple.boilerplate.presentation.base;
 
 /**
  * Created by kukuh on 27/01/17.

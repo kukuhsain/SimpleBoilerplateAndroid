@@ -8,7 +8,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.testutil.TestDataFactory;
-import com.kukuhsain.simple.boilerplate.ui.main.MainActivity;
+import com.kukuhsain.simple.boilerplate.presentation.main.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

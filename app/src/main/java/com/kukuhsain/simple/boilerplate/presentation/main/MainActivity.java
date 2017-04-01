@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.ui.main;
+package com.kukuhsain.simple.boilerplate.presentation.main;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import com.kukuhsain.simple.boilerplate.R;
 
 import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
-import com.kukuhsain.simple.boilerplate.ui.detail.DetailActivity;
+import com.kukuhsain.simple.boilerplate.presentation.detail.DetailActivity;
 
 import java.util.List;
 
