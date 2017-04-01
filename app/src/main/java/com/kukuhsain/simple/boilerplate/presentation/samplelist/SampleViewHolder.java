@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.presentation.main;
+package com.kukuhsain.simple.boilerplate.presentation.samplelist;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +15,14 @@ import butterknife.ButterKnife;
  * Created by kukuh on 16/12/16.
  */
 
-public class MainViewHolder extends RecyclerView.ViewHolder {
-    private MainActivity mainActivity;
+public class SampleViewHolder extends RecyclerView.ViewHolder {
+    private SampleListActivity sampleListActivity;
     @BindView(R.id.tv_name) TextView tvName;
     @BindView(R.id.tv_description) TextView tvDescription;
 
-    public MainViewHolder(Context context, View itemView) {
+    public SampleViewHolder(Context context, View itemView) {
         super(itemView);
-        this.mainActivity = (MainActivity) context;
+        this.sampleListActivity = (SampleListActivity) context;
         ButterKnife.bind(this, itemView);
     }
 
@@ -30,7 +30,7 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
         tvName.setText(sample.getName());
         tvDescription.setText(sample.getDescription());
         itemView.setOnClickListener(view -> {
-            mainActivity.onItemClicked(sample);
+            sampleListActivity.onItemClicked(sample);
         });
     }
 }

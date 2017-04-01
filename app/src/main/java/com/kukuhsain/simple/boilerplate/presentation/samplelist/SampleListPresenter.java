@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.presentation.main;
+package com.kukuhsain.simple.boilerplate.presentation.samplelist;
 
 import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
@@ -14,11 +14,11 @@ import rx.android.schedulers.AndroidSchedulers;
  * Created by kukuh on 16/12/16.
  */
 
-public class MainPresenter extends BasePresenter<MainMvpView> {
+public class SampleListPresenter extends BasePresenter<SampleListMvpView> {
     private final DataManager mDataManager;
     private Subscription mGetSamplesSubscription;
 
-    public MainPresenter(DataManager mDataManager) {
+    public SampleListPresenter(DataManager mDataManager) {
         this.mDataManager = mDataManager;
     }
 

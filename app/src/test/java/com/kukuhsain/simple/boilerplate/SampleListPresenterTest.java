@@ -4,8 +4,8 @@ import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.model.local.RealmHelper;
 import com.kukuhsain.simple.boilerplate.testutil.RxAndroidSchedulersRule;
-import com.kukuhsain.simple.boilerplate.presentation.main.MainMvpView;
-import com.kukuhsain.simple.boilerplate.presentation.main.MainPresenter;
+import com.kukuhsain.simple.boilerplate.presentation.samplelist.SampleListMvpView;
+import com.kukuhsain.simple.boilerplate.presentation.samplelist.SampleListPresenter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -29,25 +29,26 @@ import static org.mockito.Mockito.when;
  */
 
 @RunWith(MockitoJUnitRunner.class)
-public class MainPresenterTest {
+public class SampleListPresenterTest {
 
-    @Mock MainMvpView mMockMainMvpView;
+    @Mock
+    SampleListMvpView mMockSampleListMvpView;
     @Mock DataManager mMockDataManager;
     @Mock RealmHelper mMockRealmHelper;
-    private MainPresenter mMainPresenter;
+    private SampleListPresenter mSampleListPresenter;
 
     @Rule
     public final RxAndroidSchedulersRule mRxAndroidSchedulersRule = new RxAndroidSchedulersRule();
 
     @Before
     public void init() {
-        mMainPresenter = new MainPresenter(mMockDataManager);
-        mMainPresenter.attachView(mMockMainMvpView);
+        mSampleListPresenter = new SampleListPresenter(mMockDataManager);
+        mSampleListPresenter.attachView(mMockSampleListMvpView);
     }
 
     @After
     public void destroy() {
-        mMainPresenter.detachView();
+        mSampleListPresenter.detachView();
     }
 
     private List<Sample> getDummySamples() {
@@ -68,7 +69,7 @@ public class MainPresenterTest {
                 .thenReturn(samples);
         when(mMockDataManager.getSamples())
                 .thenReturn(Observable.just(samples));
-        mMainPresenter.getSamples();
-        verify(mMockMainMvpView, atLeastOnce()).showSamples(samples);
+        mSampleListPresenter.getSamples();
+        verify(mMockSampleListMvpView, atLeastOnce()).showSamples(samples);
     }
 }

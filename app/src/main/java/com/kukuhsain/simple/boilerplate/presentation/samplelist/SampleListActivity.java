@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.presentation.main;
+package com.kukuhsain.simple.boilerplate.presentation.samplelist;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -29,20 +29,20 @@ import butterknife.ButterKnife;
  * Created by kukuh on 14/11/16.
  */
 
-public class MainActivity extends AppCompatActivity implements MainMvpView {
+public class SampleListActivity extends AppCompatActivity implements SampleListMvpView {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rv_samples) RecyclerView rvSamples;
 
-    private MainPresenter presenter;
-    private MainAdapter adapter;
+    private SampleListPresenter presenter;
+    private SampleAdapter adapter;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sample_list);
         ButterKnife.bind(this);
-        presenter = new MainPresenter(DataManager.getInstance());
+        presenter = new SampleListPresenter(DataManager.getInstance());
         presenter.attachView(this);
 
         initActionBar();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
     private void initRv() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvSamples.setLayoutManager(layoutManager);
-        adapter = new MainAdapter();
+        adapter = new SampleAdapter();
         rvSamples.setAdapter(adapter);
     }
 

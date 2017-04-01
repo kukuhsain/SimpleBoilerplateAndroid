@@ -8,7 +8,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.kukuhsain.simple.boilerplate.model.DataManager;
 import com.kukuhsain.simple.boilerplate.model.datamodel.Sample;
 import com.kukuhsain.simple.boilerplate.testutil.TestDataFactory;
-import com.kukuhsain.simple.boilerplate.presentation.main.MainActivity;
+import com.kukuhsain.simple.boilerplate.presentation.samplelist.SampleListActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,10 +31,10 @@ import static org.mockito.Mockito.when;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class SampleListActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<SampleListActivity> activityTestRule = new ActivityTestRule<>(SampleListActivity.class);
 
     @Test
     public void sampleListShows() {

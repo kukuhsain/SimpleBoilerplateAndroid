@@ -1,4 +1,4 @@
-package com.kukuhsain.simple.boilerplate.presentation.main;
+package com.kukuhsain.simple.boilerplate.presentation.samplelist;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,10 +15,10 @@ import java.util.List;
  * Created by kukuh on 14/11/16.
  */
 
-public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
+public class SampleAdapter extends RecyclerView.Adapter<SampleViewHolder> {
     private List<Sample> mSamples;
 
-    public MainAdapter() {
+    public SampleAdapter() {
         mSamples = new ArrayList<>();
     }
 
@@ -27,13 +27,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
     }
 
     @Override
-    public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sample, parent, false);
-        return new MainViewHolder(parent.getContext(), view);
+        return new SampleViewHolder(parent.getContext(), view);
     }
 
     @Override
-    public void onBindViewHolder(MainViewHolder holder, int position) {
+    public void onBindViewHolder(SampleViewHolder holder, int position) {
         holder.bind(mSamples.get(position));
     }
 
