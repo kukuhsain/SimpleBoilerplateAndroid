@@ -30,7 +30,7 @@ public class DataManager {
         return INSTANCE;
     }
 
-    private DataManager(RetrofitService retrofitService, PreferencesHelper preferencesHelper,
+    public DataManager(RetrofitService retrofitService, PreferencesHelper preferencesHelper,
                        RealmHelper realmHelper) {
         mRetrofitService = retrofitService;
         mPreferencesHelper = preferencesHelper;
